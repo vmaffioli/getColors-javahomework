@@ -1,8 +1,13 @@
 package io;
+import java.awt.Color;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Stream;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +16,7 @@ import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import parser.ColorAverage;
 import parser.ParsePixels;
 public class FileUploadHandler extends HttpServlet {
     private static final long serialVersionUID = 1 ;
@@ -38,12 +44,10 @@ public class FileUploadHandler extends HttpServlet {
                 FileItem fileItem = it.next();
                     if (fileItem.getSize() > 0) {
                     	String tempFilePath = fileItem.toString().split(", ")[1].replace("StoreLocation=","");
-                        file_name = tempFilePath.split("/")[-1];
-                        System.out.println(file_name);
-
-                    	new ParsePixels(tempFilePath);
-                     }
-                
+                        file_name = tempFilePath.split("/")[tempFilePath.split("/").length-1];
+                    	Stream<Entry<String, Integer>> colors = new ColorAverage(new ParsePixels(tempFilePath).getColors()).getValue();
+                    	//colors.forEach(System.out::println);
+                    }
             }
         } catch (Exception e) {
             e.printStackTrace();
