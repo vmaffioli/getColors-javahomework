@@ -54,44 +54,52 @@
 
 
 		<div class="row text-center">
-            <div class="col-12">
-                <br />
-                <h1>Choose an image to get the colors!</h1>
-                <p><i>PNG JPG JPEG</i></p>
+			<div class="col-12">
 
-                <div class="custom-file-upload">
-                   <form action="FileUploadHandler" enctype="multipart/form-data" method="post">
+				<br />
+				<h1>Choose an image to get the colors!</h1>
+				<p>
+					<i>PNG JPG JPEG</i>
+				</p>
+			</div>
 
-				 <input type="file" name="file2" /><br>
-               <input type="submit" value="upload" />
-           </form>  
-           <%
-           String file_name=(String)request.getParameter("filename");
-           if(file_name!=null){
-        	   out.println(file_name+" File uploaded successfuly");
- 	        %><br>
-        		<img src="http://localhost:8080/uploaded_files/<%=file_name%>">
-           <%	   
-        	   
-           }
-           %>
-                </div>
-            </div>
-        
-				
+			<div class="col-4">
+				<div class="custom-file-upload">
+					<form action="FileUploadHandler" enctype="multipart/form-data"
+						method="post">
 
+						<input type="file" name="file2" /><br> <input type="submit"
+							value="upload" />
+					</form>
+					<%
+					String file_name = (String) request.getParameter("filename");
+					if (file_name != null) {
+						out.println(file_name + " File uploaded successfuly");
+					}
+					%><br> <img
+						src="http://localhost:8080/uploaded_files/<%=file_name%>">
+
+				</div>
+			</div>
+
+			<div class="col-3" style="background-color:black">a</div>
+			<div class="col-2">b</div>
+			<div class="col-1">c</div>
+			<div class="col-1">d</div>
+			<div class="col-1">d</div>
+			
 		</div>
 
 
 
 
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
-		crossorigin="anonymous">
-		
-	</script>
-	<script src="assets/script.js"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+			crossorigin="anonymous">
+			
+		</script>
+		<script src="assets/script.js"></script>
 </body>
 
 </html>

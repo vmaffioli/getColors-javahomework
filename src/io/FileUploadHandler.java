@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map.Entry;
-import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +16,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import parser.ColorAverage;
 import parser.ParsePixels;
+import pojo.ColorHex;
 
 public class FileUploadHandler extends HttpServlet {
     private static final long serialVersionUID = 1 ;
@@ -25,8 +24,12 @@ public class FileUploadHandler extends HttpServlet {
         doPost(request, response);
     }
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String file_name = null;
+        @SuppressWarnings("unused")
+		String file_name = null;
         String file_name2="";
+        @SuppressWarnings("unused")
+		List<String> ColorsTop5; 
+        
         
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
@@ -49,8 +52,9 @@ public class FileUploadHandler extends HttpServlet {
                     if (fileItem.getSize() > 0) {
                     	String tempFilePath = fileItem.toString().split(", ")[1].replace("StoreLocation=","");
                         file_name = tempFilePath.split("/")[tempFilePath.split("/").length-1];
-                    	Stream<Entry<String, Integer>> colors = new ColorAverage(new ParsePixels(tempFilePath).getColors()).getValue();
+                        ColorsTop5 = new ColorAverage(new ParsePixels(tempFilePath).getColors()).getTop5();
                     	//colors.forEach(System.out::println);
+                    	
                     }
             }
         } catch (Exception e) {
