@@ -1,16 +1,16 @@
 package io;
-import java.awt.Color;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -18,13 +18,16 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import parser.ColorAverage;
 import parser.ParsePixels;
+
 public class FileUploadHandler extends HttpServlet {
     private static final long serialVersionUID = 1 ;
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         doPost(request, response);
     }
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    	String file_name = "";
+        String file_name = null;
+        String file_name2="";
+        
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         boolean isMultipartContent = ServletFileUpload.isMultipartContent(request);
@@ -42,6 +45,7 @@ public class FileUploadHandler extends HttpServlet {
             
             while (it.hasNext()) {
                 FileItem fileItem = it.next();
+                file_name2 = fileItem.getName();
                     if (fileItem.getSize() > 0) {
                     	String tempFilePath = fileItem.toString().split(", ")[1].replace("StoreLocation=","");
                         file_name = tempFilePath.split("/")[tempFilePath.split("/").length-1];
@@ -53,7 +57,7 @@ public class FileUploadHandler extends HttpServlet {
             e.printStackTrace();
         } finally {
             out.println("<script type='text/javascript'>");
-            out.println("window.location.href='index.jsp?filename="+file_name+"'");
+            out.println("window.location.href='index.jsp?filename="+file_name2+"'");
             out.println("</script>");
             out.close();
         }
