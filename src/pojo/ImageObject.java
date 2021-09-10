@@ -15,7 +15,7 @@ import javax.imageio.ImageIO;
  * @author vmaffioli
  *
  */
-public class Image {
+public class ImageObject {
 	
 	private BufferedImage image;
 	private int width;
@@ -24,7 +24,7 @@ public class Image {
 
 	
 	//build the object
-	public Image(String path){
+	public ImageObject(String path){
 		try {
 			image = ImageIO.read( new File(path) );
 			width = image.getWidth();

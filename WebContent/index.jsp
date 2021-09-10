@@ -1,3 +1,7 @@
+<%@ page contentType="text/html; charset=utf-8" language="java"
+	import=" java.util.List, java.util.ArrayList, pojo.ColorPalette" errorPage=""%>
+
+
 
 
 <html>
@@ -71,23 +75,32 @@
 						<input type="file" name="file2" /><br> <input type="submit"
 							value="upload" />
 					</form>
+
 					<%
 					String file_name = (String) request.getParameter("filename");
 					if (file_name != null) {
 						out.println(file_name + " File uploaded successfuly");
 					}
-					%><br> <img
+					%>
+					<br> <img
 						src="http://localhost:8080/uploaded_files/<%=file_name%>">
 
 				</div>
 			</div>
 
-			<div class="col-3" style="background-color:black">a</div>
-			<div class="col-2">b</div>
-			<div class="col-1">c</div>
-			<div class="col-1">d</div>
-			<div class="col-1">d</div>
+			<%
+			String colorsParam = (String) request.getParameter("colors");
+			ColorPalette palette = new ColorPalette(colorsParam);
+	
 			
+			%>
+
+			<div class="col-3" style="background-color:<%=palette.getTop5().get(0)%>"><%=palette.getTop5().get(0)%></div>
+			<div class="col-2" style="background-color:<%=palette.getTop5().get(1)%>"><%=palette.getTop5().get(1)%></div>
+			<div class="col-1" style="background-color:<%=palette.getTop5().get(2)%>"><%=palette.getTop5().get(2)%></div>
+			<div class="col-1" style="background-color:<%=palette.getTop5().get(3)%>"><%=palette.getTop5().get(3)%></div>
+			<div class="col-1" style="background-color:<%=palette.getTop5().get(4)%>"><%=palette.getTop5().get(4)%></div>
+
 		</div>
 
 

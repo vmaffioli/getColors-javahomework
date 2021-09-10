@@ -16,7 +16,7 @@
 
 	<servlet>
 		<servlet-name>FileUploadHandler</servlet-name>
-		<servlet-class>io.FileUploadHandler</servlet-class>
+		<servlet-class>controller.FileUploadHandler</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>FileUploadHandler</servlet-name>
